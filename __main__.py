@@ -42,7 +42,7 @@ if __name__ == "__main__":
     b = 1   # Чем меньше b, тем наиболее вероятен выбор города на основании феромонов
     q = 100 # Параметр, имеющий значение порядка цены оптимального решения
     p = 0.3 # Интенсивность испарения
-    L = float('inf')
+    best_length = float('inf')
     T = []
     w = [] 
     # Ввод матрицы
@@ -86,11 +86,11 @@ if __name__ == "__main__":
             ant.tabu_nodes.append(ant.end_node)
             ant.length += w[ant.current_node, ant.end_node]
             # Проверяем на минимальность длины пути
-            if ant.length < L:
-                L = ant.length
+            if ant.length < best_length:
+                best_length = ant.length
                 T = ant.tabu_nodes.copy()
         # Испоряем феромоны на всех ребрах и обновляем феромоны на путях муравьев
         evaporate_pheromones()            
         update_pheromones(ants)
     
-    print(L)
+    print(best_length)
